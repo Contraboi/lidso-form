@@ -112,6 +112,8 @@ export const createForm = <Values>(options: CreateFormOptions<Values>) => {
       setIsLoading(true);
       try {
         await options.onSubmit(fields as Values);
+      } catch (error: any) {
+        console.error(error);
       } finally {
         setIsLoading(false);
       }
