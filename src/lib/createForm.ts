@@ -26,7 +26,7 @@ type CreateFormOptions<T> = {
  *   password: string;
  * };
  *
- * const { fields, register, submitForm, errors } = createForm({
+ * const { fields, register, submitForm, errors, isLoading } = createForm({
  *   onSubmit: (values) => {
  *     // do something with values
  *   },
@@ -42,7 +42,7 @@ type CreateFormOptions<T> = {
  *       {...register("password", [!fields.password && "Password is required"])}
  *     />
  *     {errors.password && <label>{errors.password}</label>}
- *     <button type="submit" disabled={isLoading()} />
+ *     <button disabled={isLoading()} />
  *   </form>
  * );
  */
@@ -101,6 +101,7 @@ export const createForm = <Values>(options: CreateFormOptions<Values>) => {
       }
 
       instance.oninput = () => _setAdequateValue(instance);
+      instance.onblur = () => !errors[key] && _validate();
     },
     name: key,
   });
