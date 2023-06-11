@@ -1,6 +1,6 @@
 {
   "name": "lidso-form",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easily manage forms in SolidJS",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ragokan/solform.git"
+    "url": "git+https://github.com/Contraboi/lidso-form/"
   },
   "keywords": [
     "forms",
@@ -22,9 +22,9 @@
   "author": "Selmir Nedžibi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ragokan/solform/issues"
+    "url": "https://github.com/Contraboi/lidso-form/issues"
   },
-  "homepage": "https://github.com/ragokan/solform#readme",
+  "homepage": "https://github.com/Contraboi/lidso-form/#readme",
   "devDependencies": {
     "tslib": "^2.4.1",
     "typescript": "^4.9.3"
