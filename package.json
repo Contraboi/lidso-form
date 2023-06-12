@@ -1,6 +1,6 @@
 {
   "name": "lidso-form",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "description": "Easily manage forms in SolidJS",
   "main": "dist/index.js",
   "scripts": {
