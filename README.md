@@ -29,11 +29,11 @@ yarn add lidso-form
 import { createForm } from 'lidso-form';
 
 type LoginForm = {
-  email: string;
+  username: string;
   password: string;
 };
 
-const { fields, register, submitForm, errors, isLoading } = createForm({
+const { fields, register, submitForm, errors, isLoading } = createForm<LoginForm>({
   onSubmit: (values) => {
     // do something with values
   },
