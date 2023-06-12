@@ -8,12 +8,11 @@ type LidsoFormElement =
 
 type FieldType = string | number | boolean;
 type Validators<T> = Partial<Record<keyof T, FieldType>>;
-type Fields<T> = Partial<Record<keyof T, FieldType>>;
 type Errors<T> = Partial<Record<keyof T, string>>;
 type Refs<T> = Partial<Record<keyof T, LidsoFormElement>>;
 type CreateFormOptions<T> = {
   onSubmit: (values: T) => Promise<void> | void;
-  initialValues?: Partial<Record<keyof T, string>>;
+  initialValues?: T;
 };
 
 /**
@@ -46,7 +45,9 @@ type CreateFormOptions<T> = {
  *   </form>
  * );
  */
-export const createForm = <Values>(options: CreateFormOptions<Values>) => {
+export const createForm = <Values extends object>(
+  options: CreateFormOptions<Values>
+) => {
   type Key = keyof Values;
 
   let refs: Refs<Values> = {};
@@ -54,23 +55,20 @@ export const createForm = <Values>(options: CreateFormOptions<Values>) => {
 
   const [isLoading, setIsLoading] = createSignal(false);
   const [errors, setErrors] = createStore<Errors<Values>>();
-  const [fields, setFields] = createStore<Fields<Values>>(
-    options?.initialValues ?? {}
+  const [fields, setFields] = createStore<Values>(
+    options?.initialValues ? options.initialValues : ({} as Values)
   );
 
   const _setAdequateValue = (ref: Refs<Values>[Key]) => {
-    const key = ref!.name as Key;
+    const key = ref!.name as any;
     if (!key) return;
 
     if (ref?.type === "number") {
-      // @ts-ignore TODO: fix this
       setFields(key, parseInt(ref.value));
     } else if (ref?.type === "checkbox") {
-      // @ts-ignore TODO: fix this
-      setFields(key, ref.checked);
+      setFields(key, (ref as HTMLInputElement).checked);
     } else {
-      // @ts-ignore TODO: fix this
-      setFields(key, ref.value);
+      setFields(key, ref!.value);
     }
   };
 
