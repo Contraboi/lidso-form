@@ -106,13 +106,17 @@ export const createForm = <Values extends object>(
 
   const _setInitialValues = (ref: LidsoFormElement, key: Key) => {
     if (options.initialValues) {
+      const value = options.initialValues[key];
+
       if (ref?.type === "number") {
-        ref.value = String(options.initialValues[key]);
+        ref.value = String(value);
       } else if (ref?.type === "checkbox") {
-        (ref as HTMLInputElement).checked = Boolean(options.initialValues[key]);
+        (ref as HTMLInputElement).checked = Boolean(value);
       } else {
         ref.value = String(options.initialValues[key]);
       }
+
+      _setAdequateValue(key, ref);
     }
   };
 
