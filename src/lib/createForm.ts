@@ -14,8 +14,6 @@ type CreateFormOptions<T> = {
   initialValues?: T;
 };
 type FormState<T> = {
-  isDirty: boolean;
-  dirtyFields: Array<keyof T>;
   touchedFields: Array<keyof T>;
   submitCount: number;
   isValid: boolean;
@@ -75,8 +73,6 @@ export const createForm = <Values extends object>(
   );
 
   const [formState, setFormState] = createStore<FormState<Values>>({
-    isDirty: false,
-    dirtyFields: [],
     touchedFields: [],
     submitCount: 0,
     isLoading: false,
@@ -85,8 +81,6 @@ export const createForm = <Values extends object>(
   });
 
   const _setAdequateValue = (key: Key, ref: Refs<Values>[Key]) => {
-    setFormState("isDirty", true);
-
     setFormState("touchedFields", (prev) => {
       if (!prev.includes(key)) prev.push(key);
       return prev;
