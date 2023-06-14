@@ -12,12 +12,13 @@
   },
   "keywords": [
     "forms",
-    "solidjs forms",
+    "form",
+    "validation",
+    "typescript",
+    "solidjs form",
     "lidso",
-    "lidso forms",
     "solidjs",
-    "solid",
-    "solid forms"
+    "solid"
   ],
   "author": "Selmir Nedžibi",
   "license": "ISC",
