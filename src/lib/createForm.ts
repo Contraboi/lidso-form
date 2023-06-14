@@ -129,7 +129,9 @@ export const createForm = <Values extends object>(
       }
     }
 
-    if (formState.submitCount > 0) setFormState("errors", reconcile(errors));
+    if (formState.submitCount > 0) {
+      setFormState("errors", reconcile(errors));
+    }
 
     const isFormValid = Object.keys(errors).length === 0;
     setFormState("isValid", isFormValid);
