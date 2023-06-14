@@ -11,7 +11,7 @@ type Errors<T> = Partial<Record<keyof T, string>>;
 type Refs<T> = Partial<Record<keyof T, LidsoFormElement>>;
 type CreateFormOptions<T> = {
   onSubmit: (values: T) => Promise<void> | void;
-  initialValues: T;
+  initialValues?: T;
 };
 type FormState<T> = {
   isDirty: boolean;
