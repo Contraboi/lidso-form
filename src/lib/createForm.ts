@@ -87,13 +87,13 @@ export const createForm = <Values extends object>(
     });
 
     if (ref?.type === "number") {
-      // @ts-ignore
+      // @ts-expect-error
       setFields(key, parseInt(ref.value));
     } else if (ref?.type === "checkbox") {
-      // @ts-ignore
+      // @ts-expect-error
       setFields(key, (ref as HTMLInputElement).checked);
     } else {
-      // @ts-ignore
+      // @ts-expect-error
       setFields(key, ref!.value);
     }
   };
