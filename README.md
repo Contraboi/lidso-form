@@ -26,33 +26,30 @@ yarn add lidso-form
 ## Quick start
 
 ```tsx
-import { createForm } from 'lidso-form';
-
 type LoginForm = {
-  username: string;
-  password: string;
+    username: string;
+    password: string;
 };
 
-const { fields, register, submitForm, errors, isLoading } = createForm<LoginForm>({
-  onSubmit: (values) => {
-    // do something with values
-  },
+const { fields, register, submitForm, formState: {errors, isLoading} } = createForm({
+    onSubmit: (values) => {
+        // do something with values
+    },
 });
 
 return (
-  <form onsubmit={submitForm}>
-    <input
-      {...register("username", [!fields.username && "Username is required"])}
-    />
-    {errors.username && <label>{errors.username}</label>}
-    <input
-      {...register("password", [!fields.password && "Password is required"])}
-    />
-    {errors.password && <label>{errors.password}</label>}
-    <button disabled={isLoading()} >Submit</button>
-  </form>
- );
-}
+    <form onsubmit={submitForm}>
+        <input
+            {...register("username", [!fields.username && "Username is required"])}
+        />
+        {errors.username && <label>{errors.username}</label>}
+        <input
+            {...register("password", [!fields.password && "Password is required"])}
+        />
+        {errors.password && <label>{errors.password}</label>}
+        <button disabled={isLoading} />
+    </form>
+);
 ```
 
 ## API
@@ -69,18 +66,20 @@ It has two properties:
 ### `register`
 This method allows you to register an input or select element and apply validation rules to form. Validation rules are all based on booleans, and return a string if the validation fails.
 By invoking the register function and supplying an input's name, next things will happen:
-+ oninput event will be registered to the input element which will trigger form state update
-+ onblur event will be registered to the input element which will trigger validation
++ oninput event will be registered to the input element which will trigger form state update & validation
 + name of the input element will be registered to the form state
+
+### `formState`
+This property is an object that contains all the state of the form. It has the following properties:
++ **isValid**: This property is a boolean value that indicates whether the form is valid.
++ **errors**: This property is an object that contains all the errors of the form. The keys of this object correspond to the keys of T, and the values are strings that represent the error message.
++ **isValid**: This property is a boolean value that indicates whether the form is valid.
++ **touchedFields**: This property is an object that contains all the touched fields of the form. The keys of this object correspond to the keys of T, and the values are boolean values that indicate whether the field has been touched.
++ **submitCount**: This property is a number that indicates how many times the form has been submitted.
++ **isLoading**: This property is a boolean value that indicates whether the form is in the process of submitting.
 
 ### `submitForm`
 This method allows you to submit the form. It will trigger validation for all fields and if all fields are valid, it will invoke the onSubmit function passed to the registered to form.
-
-### `isLoading`
-This method returns a boolean value which indicates whether the form is in the process of submitting.
-
-### `errors`
-This property is an object that contains all the errors of the form. The keys of this object correspond to the keys of T, and the values are strings that represent the error message.
 
 ### `fields`
 This property is an object that contains all the fields of the form. The keys of this object correspond to the keys of T.

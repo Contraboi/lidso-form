@@ -21,8 +21,6 @@ type FormState<T> = {
   errors: Errors<T>;
 };
 
-// TODO: Update docs
-
 /**
  * ## Creates a form with validation and submission handling.
  *
@@ -33,7 +31,7 @@ type FormState<T> = {
  *   password: string;
  * };
  *
- * const { fields, register, submitForm, errors, isLoading } = createForm({
+ * const { fields, register, submitForm, formState: {errors, isLoading} } = createForm({
  *   onSubmit: (values) => {
  *     // do something with values
  *   },
@@ -49,16 +47,10 @@ type FormState<T> = {
  *       {...register("password", [!fields.password && "Password is required"])}
  *     />
  *     {errors.password && <label>{errors.password}</label>}
- *     <button disabled={isLoading()} />
+ *     <button disabled={isLoading} />
  *   </form>
  * );
  */
-
-type PartialOrType<T, K> = T extends undefined
-  ? Partial<K>
-  : T extends K
-  ? K
-  : Partial<K>;
 
 export const createForm = <Values extends object>(
   options: CreateFormOptions<Values>
